@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["crew_mcp_agent", "otel_setup"]
+
+[project]
+name = "crewai-mcp-agent"
+version = "0.1.0"
+description = "CrewAI MCP agent with independent OTel tracing"
+requires-python = ">=3.11"
+dependencies = [
+    # CrewAI
+    "crewai>=1.8.0",
+    "crewai-tools[mcp]>=1.8.0",
+
+    # LangChain (for CrewAI LLM compatibility)
+    "langchain-openai>=0.3.0,<0.3.23",
+
+    # OpenAI - pinned for crewai compatibility
+    "openai>=1.83.0,<1.84.0",
+
+    # OpenTelemetry with OpenInference for CrewAI
+    "opentelemetry-api>=1.34.0",
+    "opentelemetry-sdk>=1.34.0",
+    "opentelemetry-exporter-otlp>=1.34.0",
+    "openinference-instrumentation-crewai>=0.1.0",
+
+    # MCP server
+    "mcp>=1.16.0",
+
+    # HTTP server support
+    "fastapi>=0.128.0",
+    "uvicorn>=0.40.0",
+
+    # Utilities
+    "python-dotenv>=1.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.0",
+    "pytest-asyncio>=0.24.0",
+]
